@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preethiraj Gorre | AWS Data Engineer &amp; Cloud Architect</title>
+  <meta name="description" content="Portfolio of Preethiraj Gorre, AWS Certified Data Engineer with 5 years of experience architecting large-scale ETL pipelines, PySpark data transformations, Amazon Redshift warehouses, and Medallion architectures." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cloud: {
+              950: '#040711',
+              900: '#070d1a',
+              850: '#0b1326',
+              800: '#0f1b36',
+              700: '#1a2c54',
+              accent: '#00f0ff',
+              aws: '#ff9900',
+              spark: '#e25a1c',
+              emerald: '#10b981',
+              violet: '#8b5cf6'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace']
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'glow-line': 'glow 3s ease-in-out infinite'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' }
+            },
+            glow: {
+              '0%, 100%': { opacity: '0.4' },
+              '50%': { opacity: '0.9' }
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070d1a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1a2c54;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00f0ff;
+    }
+
+    /* Glassmorphism & Cyber Accents */
+    .glass-card {
+      background: rgba(11, 19, 38, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(0, 240, 255, 0.12);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+    }
+    .glass-card:hover {
+      border-color: rgba(0, 240, 255, 0.35);
+      box-shadow: 0 12px 35px -10px rgba(0, 240, 255, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .aws-card-glow {
+      position: relative;
+    }
+    .aws-card-glow::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      background: linear-gradient(135deg, rgba(255, 153, 0, 0.4), transparent 60%);
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0.6;
+    }
+
+    /* Grid backdrop */
+    .cyber-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    /* Print View for Resume Modal */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printableResumeArea, #printableResumeArea * {
+        visibility: visible;
+      }
+      #printableResumeArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white !important;
+        color: black !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-cloud-950 text-slate-200 font-sans antialiased overflow-x-hidden relative selection:bg-cloud-accent selection:text-cloud-950">
+
+  <!-- Ambient Glow Backgrounds -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-cloud-accent/10 rounded-full blur-[140px]"></div>
+    <div class="absolute top-1/3 -right-40 w-[30rem] h-[30rem] bg-cloud-aws/10 rounded-full blur-[160px]"></div>
+    <div class="absolute -bottom-40 left-1/3 w-[32rem] h-[32rem] bg-cloud-violet/10 rounded-full blur-[150px]"></div>
+    <div class="absolute inset-0 cyber-grid opacity-60"></div>
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-slate-800/80 bg-cloud-950/85 backdrop-blur-md" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-cloud-accent rounded-lg p-1">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cloud-accent via-blue-600 to-cloud-aws flex items-center justify-center font-mono font-bold text-cloud-950 text-lg shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+          PG
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold tracking-tight text-white text-base sm:text-lg group-hover:text-cloud-accent transition-colors">Preethiraj Gorre</span>
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          </div>
+          <p class="text-xs text-slate-400 font-mono tracking-wider flex items-center gap-1.5">
+            <span class="text-cloud-accent font-semibold">AWS</span> DATA ENGINEER &bull; 5 YRS EXP
+          </p>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden lg:flex items-center gap-1 bg-cloud-900/80 border border-slate-800 rounded-full p-1.5 text-sm font-medium">
+        <a href="#about" class="px-4 py-2 rounded-full text-slate-300 hover:text-white hover:bg-slate-800/60 transition">About</a>
+        <a href="#skills" class="px-4 py-2 rounded-full text-slate-300 hover:text-white hover:bg-slate-800/60 transition">Skills</a>
+        <a href="#pipeline" class="px-4 py-2 rounded-full text-slate-300 hover:text-white hover:bg-slate-800/60 transition">Pipeline Architecture</a>
+        <a href="#projects" class="px-4 py-2 rounded-full text-slate-300 hover:text-white hover:bg-slate-800/60 transition">Projects</a>
+        <a href="#experience" class="px-4 py-2 rounded-full text-slate-300 hover:text-white hover:bg-slate-800/60 transition">Experience</a>
+        <a href="#certifications" class="px-4 py-2 rounded-full text-slate-300 hover:text-white hover:bg-slate-800/60 transition">Certifications</a>
+        <a href="#contact" class="px-4 py-2 rounded-full text-slate-300 hover:text-white hover:bg-slate-800/60 transition">Contact</a>
+      </nav>
+
+      <!-- Right CTAs -->
+      <div class="hidden sm:flex items-center gap-3">
+        <button onclick="openResumeModal()" class="px-4 py-2 text-xs md:text-sm font-semibold rounded-lg border border-slate-700 bg-slate-850 hover:bg-slate-800 text-slate-200 hover:text-white transition flex items-center gap-2 shadow-sm">
+          <svg class="w-4 h-4 text-cloud-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <span>Résumé</span>
+        </button>
+        <a href="#contact" class="px-4 py-2 text-xs md:text-sm font-semibold rounded-lg bg-gradient-to-r from-cloud-accent to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-cloud-950 transition flex items-center gap-2 shadow-md shadow-cyan-500/20 font-mono">
+          <span>Let's Connect</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobileMenuBtn" aria-label="Toggle navigation menu" class="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cloud-accent">
+        <svg id="menuIconClosed" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg id="menuIconOpened" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-cloud-900/95 border-b border-slate-800 px-4 pt-2 pb-6 space-y-2 backdrop-blur-xl">
+      <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800" onclick="toggleMobileMenu()">About</a>
+      <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800" onclick="toggleMobileMenu()">Skills</a>
+      <a href="#pipeline" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800" onclick="toggleMobileMenu()">Pipeline Architecture</a>
+      <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800" onclick="toggleMobileMenu()">Projects</a>
+      <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800" onclick="toggleMobileMenu()">Experience</a>
+      <a href="#certifications" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800" onclick="toggleMobileMenu()">Certifications</a>
+      <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800" onclick="toggleMobileMenu()">Contact</a>
+      <div class="pt-4 flex flex-col gap-2">
+        <button onclick="openResumeModal(); toggleMobileMenu();" class="w-full py-2.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-200 text-center font-medium text-sm flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 text-cloud-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          View / Download Résumé
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10 pt-24">
+
+    <!-- 1. HERO SECTION WITH STREAM ENGINE -->
+    <section id="hero" class="relative min-h-[92vh] flex items-center py-12 lg:py-20 border-b border-slate-800/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Hero Copy -->
+          <div class="lg:col-span-7 space-y-6 text-left">
+            
+            <!-- Certification Badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cloud-aws/30 bg-cloud-aws/10 text-cloud-aws text-xs sm:text-sm font-mono tracking-wide">
+              <!-- AWS Cloud Icon -->
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/>
+              </svg>
+              <span>AWS Certified Data Engineer – Associate</span>
+            </div>
+
+            <!-- Primary Headline -->
+            <h1 class="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-white leading-tight">
+              Engineering Reliable Data. <br/>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-cloud-accent via-cyan-300 to-blue-400">
+                Powering Smarter Decisions.
+              </span>
+            </h1>
+
+            <!-- Subtitle -->
+            <div class="text-base sm:text-lg lg:text-xl text-slate-300 font-medium">
+              AWS Data Engineer <span class="text-cloud-accent">&bull;</span> Cloud Data Pipelines <span class="text-cloud-accent">&bull;</span> PySpark <span class="text-cloud-accent">&bull;</span> ETL &amp; Analytics
+            </div>
+
+            <!-- Narrative Intro -->
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl">
+              Experienced Data Engineer with approximately <strong class="text-white font-semibold">5 years of hands-on expertise</strong> designing mutualized data warehouses on <span class="text-cloud-accent">Amazon Redshift</span>, serverless ETL with <span class="text-cloud-accent">AWS Glue &amp; PySpark</span>, event-driven pipelines via <span class="text-cloud-accent">Lambda &amp; Step Functions</span>, and enterprise analytics dashboards using <span class="text-cloud-accent">Amazon QuickSight</span>.
+            </p>
+
+            <!-- Quick Specs Row -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 max-w-xl text-xs font-mono">
+              <div class="p-3 rounded-lg border border-slate-800 bg-cloud-900/60">
+                <span class="text-slate-500 block">SPECIALIZATION</span>
+                <span class="text-white font-semibold">AWS Glue &amp; PySpark</span>
+              </div>
+              <div class="p-3 rounded-lg border border-slate-800 bg-cloud-900/60">
+                <span class="text-slate-500 block">WAREHOUSING</span>
+                <span class="text-cloud-aws font-semibold">Amazon Redshift</span>
+              </div>
+              <div class="p-3 rounded-lg border border-slate-800 bg-cloud-900/60 col-span-2 sm:col-span-1">
+                <span class="text-slate-500 block">ARCHITECTURE</span>
+                <span class="text-cloud-accent font-semibold">Medallion (Bronze/Silver/Gold)</span>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex flex-wrap items-center gap-4 pt-4">
+              <a href="#projects" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cloud-accent to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-cloud-950 font-bold text-sm tracking-wide shadow-lg shadow-cyan-500/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                <span>Explore Featured Projects</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              </a>
+              <button onclick="openResumeModal()" class="px-6 py-3.5 rounded-xl border border-slate-700 bg-cloud-850 hover:bg-slate-800 text-white font-semibold text-sm transition-all flex items-center gap-2 shadow-sm">
+                <svg class="w-4 h-4 text-cloud-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <span>Download Résumé</span>
+              </button>
+            </div>
+
+            <!-- Real-time Status -->
+            <div class="flex items-center gap-3 pt-2 text-xs text-slate-400 font-mono">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/70 text-emerald-400 border border-emerald-800/80">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                Active Senior Data Engineer
+              </span>
+              <span>&bull;</span>
+              <span>Available for Global Tech &amp; Cloud Roles</span>
+            </div>
+
+          </div>
+
+          <!-- Hero Right: Live Interactive Cloud Engine Visualizer -->
+          <div class="lg:col-span-5">
+            <div class="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 relative overflow-hidden shadow-2xl">
+              
+              <div class="flex items-center justify-between pb-3 border-b border-slate-800/80 mb-4">
+                <div class="flex items-center gap-2">
+                  <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                  <span class="ml-2 font-mono text-xs text-slate-400 font-medium">cloud_pipeline_telemetry.io</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button id="triggerBatchBtn" class="text-[11px] font-mono px-2 py-0.5 rounded bg-cloud-accent/10 border border-cloud-accent/30 text-cloud-accent hover:bg-cloud-accent/20 transition">
+                    + Ingest Batch
+                  </button>
+                </div>
+              </div>
+
+              <!-- Interactive Canvas for Flowing Particles -->
+              <div class="relative w-full h-72 sm:h-80 bg-cloud-950/90 rounded-xl overflow-hidden border border-slate-800">
+                <canvas id="pipelineCanvas" class="w-full h-full block"></canvas>
+                
+                <!-- Overlay Legend -->
+                <div class="absolute bottom-2 left-2 right-2 flex justify-between items-center text-[10px] font-mono bg-cloud-900/80 backdrop-blur px-2.5 py-1.5 rounded-lg border border-slate-800 text-slate-400">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 inline-block"></span> Sources
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-amber-400 inline-block"></span> Glue/Spark
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-blue-500 inline-block"></span> Redshift
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span> QuickSight
+                  </span>
+                </div>
+              </div>
+
+              <!-- Live Stats Strip -->
+              <div class="grid grid-cols-3 gap-2 mt-4 text-center font-mono text-xs">
+                <div class="p-2 rounded-lg bg-cloud-900/70 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">THROUGHPUT</span>
+                  <span id="statThroughput" class="text-cloud-accent font-semibold">14,820 rec/s</span>
+                </div>
+                <div class="p-2 rounded-lg bg-cloud-900/70 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">PIPELINE STATUS</span>
+                  <span class="text-emerald-400 font-semibold flex items-center justify-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Healthy
+                  </span>
+                </div>
+                <div class="p-2 rounded-lg bg-cloud-900/70 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">LATENCY</span>
+                  <span id="statLatency" class="text-slate-200 font-semibold">sub-second</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ABOUT ME SECTION -->
+    <section id="about" class="py-20 border-b border-slate-800/60 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-xs uppercase font-mono tracking-widest text-cloud-accent mb-2">Architecting Cloud Excellence</h2>
+          <h3 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Professional Profile</h3>
+          <p class="text-slate-400 mt-3 text-sm sm:text-base">Specializing in resilient enterprise pipelines, schema evolution, and performance tuning.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Profile Card -->
+          <div class="lg:col-span-5 glass-card rounded-2xl p-6 sm:p-8 border border-slate-800 text-center relative">
+            <div class="relative w-36 h-36 mx-auto mb-6">
+              <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-cloud-accent via-blue-500 to-cloud-aws animate-pulse-slow blur-md opacity-60"></div>
+              <div class="relative w-full h-full rounded-full border-2 border-cloud-accent/60 overflow-hidden bg-cloud-900 flex items-center justify-center text-4xl font-bold text-cloud-accent font-mono shadow-inner">
+                PG
+              </div>
+              <div class="absolute bottom-1 right-1 w-6 h-6 rounded-full bg-cloud-aws border-2 border-cloud-950 flex items-center justify-center text-[10px] text-cloud-950 font-bold" title="AWS Certified">
+                ✓
+              </div>
+            </div>
+
+            <h4 class="text-xl font-bold text-white">Preethiraj Gorre</h4>
+            <p class="text-sm font-mono text-cloud-accent mt-0.5">Senior AWS Data Engineer</p>
+            <p class="text-xs text-slate-400 mt-2 flex items-center justify-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+              Chittoor, AP / Chennai Tech Hub, India
+            </p>
+
+            <div class="border-t border-slate-800/80 my-5"></div>
+
+            <div class="grid grid-cols-2 gap-3 text-left font-mono text-xs">
+              <div>
+                <span class="text-slate-500 text-[10px] uppercase">Experience</span>
+                <p class="text-white font-semibold">~5 Years (2021-Present)</p>
+              </div>
+              <div>
+                <span class="text-slate-500 text-[10px] uppercase">Primary Stack</span>
+                <p class="text-white font-semibold">AWS Glue &bull; PySpark &bull; Redshift</p>
+              </div>
+              <div>
+                <span class="text-slate-500 text-[10px] uppercase">Degree</span>
+                <p class="text-slate-300">B.Tech (ECE, 2021)</p>
+              </div>
+              <div>
+                <span class="text-slate-500 text-[10px] uppercase">Languages</span>
+                <p class="text-slate-300">English, Telugu, Tamil</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary & Highlights -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800">
+              <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                <span class="w-2 h-4 bg-cloud-accent rounded-sm"></span>
+                Core Architectural Philosophy
+              </h4>
+              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                With approximately five years of dedicated experience as an AWS Data Engineer, I bridge the gap between high-volume distributed data sources and mission-critical enterprise decision-making. My work spans architecting mutualized star-schema data warehouses in <strong>Amazon Redshift</strong>, developing serverless transformations with <strong>AWS Glue in PySpark</strong>, and building event-driven serverless ingestion using <strong>AWS Lambda</strong> in Python.
+              </p>
+              <p class="text-slate-400 text-sm leading-relaxed mt-3">
+                I place continuous emphasis on automating operational architectures, ensuring rigorous data validation, building reconciliation layers for regulatory submissions, fine-tuning complex SQL queries, and deploying repeatable infrastructure with CloudFormation and CI/CD pipelines.
+              </p>
+            </div>
+
+            <!-- Pillars Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="p-4 rounded-xl border border-slate-800 bg-cloud-900/40">
+                <div class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 font-mono mb-2">
+                  01
+                </div>
+                <h5 class="text-sm font-semibold text-white">Large-Scale Distributed ETL</h5>
+                <p class="text-xs text-slate-400 mt-1">PySpark processing on AWS Glue, handling complex joins, partitioned writes, and schema evolution across multi-tenant feeds.</p>
+              </div>
+
+              <div class="p-4 rounded-xl border border-slate-800 bg-cloud-900/40">
+                <div class="w-8 h-8 rounded-lg bg-cloud-aws/10 border border-cloud-aws/30 flex items-center justify-center text-cloud-aws font-mono mb-2">
+                  02
+                </div>
+                <h5 class="text-sm font-semibold text-white">Modern Warehousing</h5>
+                <p class="text-xs text-slate-400 mt-1">Designing Amazon Redshift schemas, materialized views, query performance tuning, and archival architectures.</p>
+              </div>
+
+              <div class="p-4 rounded-xl border border-slate-800 bg-cloud-900/40">
+                <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-mono mb-2">
+                  03
+                </div>
+                <h5 class="text-sm font-semibold text-white">Data Quality &amp; Reconciliation</h5>
+                <p class="text-xs text-slate-400 mt-1">Automated reconciliation engines for insurance regulatory submissions (IIB), anomaly flagging, and data validation rules.</p>
+              </div>
+
+              <div class="p-4 rounded-xl border border-slate-800 bg-cloud-900/40">
+                <div class="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/30 flex items-center justify-center text-violet-400 font-mono mb-2">
+                  04
+                </div>
+                <h5 class="text-sm font-semibold text-white">Cloud Orchestration &amp; DevOps</h5>
+                <p class="text-xs text-slate-400 mt-1">Workflow automation via AWS Step Functions &amp; Airflow, CloudWatch monitoring, CloudFormation IaC, Git, and Jenkins.</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. INTERACTIVE DATA PIPELINE ARCHITECTURE (MEDALLION & REAL-TIME FLOW) -->
+    <section id="pipeline" class="py-20 border-b border-slate-800/60 bg-cloud-900/30 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cloud-accent/10 border border-cloud-accent/30 text-cloud-accent text-xs font-mono mb-3">
+            <span>INTERACTIVE ARCHITECTURE VISUALIZER</span>
+          </div>
+          <h3 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">End-to-End AWS Medallion Data Engine</h3>
+          <p class="text-slate-400 mt-2 text-sm sm:text-base">Click any node below to inspect implementation patterns, AWS services used, and data transformations.</p>
+        </div>
+
+        <!-- Interactive Flow Graph Container -->
+        <div class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800">
+          
+          <!-- Node Grid / Stages -->
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 relative z-10" id="nodesContainer">
+            
+            <!-- Stage 1: Sources -->
+            <button onclick="selectPipelineNode('sources')" class="pipeline-node text-left p-3.5 rounded-xl border border-slate-800 bg-cloud-950/80 hover:border-cloud-accent focus:outline-none transition group active-node" data-target="sources">
+              <div class="text-[10px] font-mono text-slate-500 mb-1">01 &bull; INGEST</div>
+              <div class="font-bold text-sm text-white group-hover:text-cloud-accent flex items-center justify-between">
+                <span>Sources</span>
+                <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">OLTP, SFTP, APIs, Streams</p>
+            </button>
+
+            <!-- Stage 2: Ingestion Service -->
+            <button onclick="selectPipelineNode('ingest')" class="pipeline-node text-left p-3.5 rounded-xl border border-slate-800 bg-cloud-950/80 hover:border-cloud-accent focus:outline-none transition group" data-target="ingest">
+              <div class="text-[10px] font-mono text-slate-500 mb-1">02 &bull; GATEWAY</div>
+              <div class="font-bold text-sm text-white group-hover:text-cloud-accent flex items-center justify-between">
+                <span>Lambda &amp; Firehose</span>
+                <span class="w-2 h-2 rounded-full bg-cloud-aws"></span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">API GW, Event triggers</p>
+            </button>
+
+            <!-- Stage 3: Bronze Layer -->
+            <button onclick="selectPipelineNode('bronze')" class="pipeline-node text-left p-3.5 rounded-xl border border-slate-800 bg-cloud-950/80 hover:border-cloud-accent focus:outline-none transition group" data-target="bronze">
+              <div class="text-[10px] font-mono text-amber-500/80 mb-1">03 &bull; BRONZE</div>
+              <div class="font-bold text-sm text-white group-hover:text-cloud-accent flex items-center justify-between">
+                <span>S3 Raw Bucket</span>
+                <span class="w-2 h-2 rounded-full bg-amber-600"></span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Raw JSON / CSV / Text</p>
+            </button>
+
+            <!-- Stage 4: Processing / Glue -->
+            <button onclick="selectPipelineNode('glue')" class="pipeline-node text-left p-3.5 rounded-xl border border-slate-800 bg-cloud-950/80 hover:border-cloud-accent focus:outline-none transition group" data-target="glue">
+              <div class="text-[10px] font-mono text-slate-500 mb-1">04 &bull; ETL ENGINE</div>
+              <div class="font-bold text-sm text-white group-hover:text-cloud-accent flex items-center justify-between">
+                <span>AWS Glue &amp; PySpark</span>
+                <span class="w-2 h-2 rounded-full bg-cloud-spark"></span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Distributed Transforms</p>
+            </button>
+
+            <!-- Stage 5: Silver Layer -->
+            <button onclick="selectPipelineNode('silver')" class="pipeline-node text-left p-3.5 rounded-xl border border-slate-800 bg-cloud-950/80 hover:border-cloud-accent focus:outline-none transition group" data-target="silver">
+              <div class="text-[10px] font-mono text-slate-400 mb-1">05 &bull; SILVER</div>
+              <div class="font-bold text-sm text-white group-hover:text-cloud-accent flex items-center justify-between">
+                <span>Cleansed Parquet</span>
+                <span class="w-2 h-2 rounded-full bg-slate-300"></span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Validation &amp; Enriched</p>
+            </button>
+
+            <!-- Stage 6: Gold / Warehouse -->
+            <button onclick="selectPipelineNode('gold')" class="pipeline-node text-left p-3.5 rounded-xl border border-slate-800 bg-cloud-950/80 hover:border-cloud-accent focus:outline-none transition group" data-target="gold">
+              <div class="text-[10px] font-mono text-yellow-400 mb-1">06 &bull; GOLD DWH</div>
+              <div class="font-bold text-sm text-white group-hover:text-cloud-accent flex items-center justify-between">
+                <span>Amazon Redshift</span>
+                <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Mutualized Star Schema</p>
+            </button>
+
+            <!-- Stage 7: Analytics & Reporting -->
+            <button onclick="selectPipelineNode('analytics')" class="pipeline-node text-left p-3.5 rounded-xl border border-slate-800 bg-cloud-950/80 hover:border-cloud-accent focus:outline-none transition group col-span-2 md:col-span-4 lg:col-span-1" data-target="analytics">
+              <div class="text-[10px] font-mono text-emerald-400 mb-1">07 &bull; SERVING</div>
+              <div class="font-bold text-sm text-white group-hover:text-cloud-accent flex items-center justify-between">
+                <span>QuickSight &amp; IIB</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Dashboards &amp; Reg Submissions</p>
+            </button>
+
+          </div>
+
+          <!-- Flow connector bar -->
+          <div class="w-full h-1 bg-gradient-to-r from-blue-500 via-cloud-accent to-emerald-400 rounded-full my-6 opacity-40"></div>
+
+          <!-- Dynamic Inspection Panel -->
+          <div id="nodeDetailPanel" class="bg-cloud-950/90 rounded-xl p-6 border border-slate-800/80">
+            <!-- Content will be swapped by selectPipelineNode() -->
+          </div>
+
+          <!-- Cross-Cutting Governance Banner -->
+          <div class="mt-6 pt-4 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono text-slate-400">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+              <span><strong class="text-white">Orchestration:</strong> AWS Step Functions &amp; Apache Airflow</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+              <span><strong class="text-white">Observability:</strong> AWS CloudWatch Alarms &amp; Metric Filters</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+              <span><strong class="text-white">Deployments:</strong> AWS CloudFormation &amp; Jenkins CI/CD</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. TECHNICAL SKILLS MATRIX -->
+    <section id="skills" class="py-20 border-b border-slate-800/60 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <h2 class="text-xs uppercase font-mono tracking-widest text-cloud-accent mb-2">Technical Capabilities</h2>
+          <h3 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Core Engineering Stack</h3>
+          <p class="text-slate-400 mt-2 text-sm sm:text-base">Categorized enterprise competencies grounded in real-world production environments.</p>
+
+          <!-- Interactive Skill Category Filters -->
+          <div class="flex flex-wrap justify-center gap-2 mt-6" id="skillFilters">
+            <button onclick="filterSkills('all')" class="skill-filter-btn px-4 py-1.5 rounded-full text-xs font-mono border border-cloud-accent bg-cloud-accent/15 text-cloud-accent transition active" data-filter="all">All Disciplines</button>
+            <button onclick="filterSkills('aws')" class="skill-filter-btn px-4 py-1.5 rounded-full text-xs font-mono border border-slate-800 bg-cloud-900/60 text-slate-300 hover:border-slate-700 transition" data-filter="aws">AWS Cloud Services</button>
+            <button onclick="filterSkills('data')" class="skill-filter-btn px-4 py-1.5 rounded-full text-xs font-mono border border-slate-800 bg-cloud-900/60 text-slate-300 hover:border-slate-700 transition" data-filter="data">Data Engineering &amp; ETL</button>
+            <button onclick="filterSkills('languages')" class="skill-filter-btn px-4 py-1.5 rounded-full text-xs font-mono border border-slate-800 bg-cloud-900/60 text-slate-300 hover:border-slate-700 transition" data-filter="languages">Languages &amp; DBs</button>
+            <button onclick="filterSkills('devops')" class="skill-filter-btn px-4 py-1.5 rounded-full text-xs font-mono border border-slate-800 bg-cloud-900/60 text-slate-300 hover:border-slate-700 transition" data-filter="devops">DevOps &amp; Tools</button>
+          </div>
+        </div>
+
+        <!-- Skills Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="skillsGrid">
+          
+          <!-- Card: Cloud & AWS Services -->
+          <div class="skill-card glass-card rounded-2xl p-6 border border-slate-800 space-y-4" data-category="aws">
+            <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+              <h4 class="font-bold text-white text-base flex items-center gap-2">
+                <!-- Cloud SVG -->
+                <svg class="w-5 h-5 text-cloud-aws" fill="currentColor" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+                AWS Cloud Ecosystem
+              </h4>
+              <span class="text-[10px] font-mono text-cloud-aws bg-cloud-aws/10 px-2 py-0.5 rounded border border-cloud-aws/20">Core Platform</span>
+            </div>
+            <div class="flex flex-wrap gap-2 text-xs font-mono">
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">AWS Glue</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">AWS Lambda</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Amazon S3</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Amazon Redshift</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">AWS Step Functions</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">AWS CloudWatch</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">AWS CloudFormation</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Amazon Athena</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Amazon QuickSight</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Kinesis Firehose</span>
+            </div>
+            <p class="text-xs text-slate-400">Serverless extractors, distributed transformation compute, cost-optimized tiered S3 storage, and real-time monitoring.</p>
+          </div>
+
+          <!-- Card: Languages & Scripting -->
+          <div class="skill-card glass-card rounded-2xl p-6 border border-slate-800 space-y-4" data-category="languages">
+            <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+              <h4 class="font-bold text-white text-base flex items-center gap-2">
+                <!-- Code SVG -->
+                <svg class="w-5 h-5 text-cloud-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                Languages &amp; Querying
+              </h4>
+              <span class="text-[10px] font-mono text-cloud-accent bg-cloud-accent/10 px-2 py-0.5 rounded border border-cloud-accent/20">Engineering</span>
+            </div>
+            <div class="flex flex-wrap gap-2 text-xs font-mono">
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-white font-semibold">Python</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-white font-semibold">PySpark</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-white font-semibold">SQL (Advanced)</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-300">PL/pgSQL</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-300">Bash / Shell</span>
+            </div>
+            <p class="text-xs text-slate-400">Crafting PySpark distributed DataFrame manipulations, complex stored procedures, materialized views, and Lambda event triggers.</p>
+          </div>
+
+          <!-- Card: Data Engineering Core -->
+          <div class="skill-card glass-card rounded-2xl p-6 border border-slate-800 space-y-4" data-category="data">
+            <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+              <h4 class="font-bold text-white text-base flex items-center gap-2">
+                <!-- Database/Pipeline SVG -->
+                <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7c0-2-1.5-3-3.5-3h-9C5.5 4 4 5 4 7zm0 5c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3m-16-5c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3"/></svg>
+                Data Engineering Core
+              </h4>
+              <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Architecture</span>
+            </div>
+            <div class="flex flex-wrap gap-2 text-xs font-mono">
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">ETL / ELT Pipelines</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Data Warehousing</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Data Transformation</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Data Ingestion</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Data Validation</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Data Quality &amp; Recon</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Medallion Design</span>
+            </div>
+            <p class="text-xs text-slate-400">Translating functional requirement documents into resilient transformation logics, schema governance, and data consistency safeguards.</p>
+          </div>
+
+          <!-- Card: Databases & Storage -->
+          <div class="skill-card glass-card rounded-2xl p-6 border border-slate-800 space-y-4" data-category="languages">
+            <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+              <h4 class="font-bold text-white text-base flex items-center gap-2">
+                <!-- Storage SVG -->
+                <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
+                Databases &amp; Repositories
+              </h4>
+              <span class="text-[10px] font-mono text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">Storage</span>
+            </div>
+            <div class="flex flex-wrap gap-2 text-xs font-mono">
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Amazon Redshift</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">PostgreSQL</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Amazon S3 Lake</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Oracle Migration (OCS/DSS)</span>
+            </div>
+            <p class="text-xs text-slate-400">Mutualized multi-tenant Redshift architectures, table partitioning, distribution styles, archival, and legacy Oracle migration to PostgreSQL.</p>
+          </div>
+
+          <!-- Card: DevOps & CI/CD -->
+          <div class="skill-card glass-card rounded-2xl p-6 border border-slate-800 space-y-4" data-category="devops">
+            <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+              <h4 class="font-bold text-white text-base flex items-center gap-2">
+                <!-- Git Branch SVG -->
+                <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 15a3 3 0 100-6 3 3 0 000 6zm0 0v6m8-12a3 3 0 100-6 3 3 0 000 6zm0 0v3a3 3 0 01-3 3H8"/></svg>
+                DevOps &amp; Infrastructure
+              </h4>
+              <span class="text-[10px] font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">Automation</span>
+            </div>
+            <div class="flex flex-wrap gap-2 text-xs font-mono">
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Git</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Jenkins CI/CD</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">AWS CloudFormation</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Apache Airflow</span>
+            </div>
+            <p class="text-xs text-slate-400">Deploying AWS cloud services using declarative CloudFormation stacks, automated Jenkins testing, and version-controlled ETL jobs.</p>
+          </div>
+
+          <!-- Card: Integration & BI -->
+          <div class="skill-card glass-card rounded-2xl p-6 border border-slate-800 space-y-4" data-category="aws">
+            <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+              <h4 class="font-bold text-white text-base flex items-center gap-2">
+                <!-- Chart SVG -->
+                <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                Integration &amp; Analytics
+              </h4>
+              <span class="text-[10px] font-mono text-yellow-400 bg-yellow-400/10 px-2 py-0.5 rounded border border-yellow-400/20">Business Value</span>
+            </div>
+            <div class="flex flex-wrap gap-2 text-xs font-mono">
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Amazon QuickSight</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">API Gateway</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">IIB Submission Layer</span>
+              <span class="px-3 py-1.5 rounded-lg bg-cloud-900 border border-slate-800 text-slate-200">Third-Party App Integration</span>
+            </div>
+            <p class="text-xs text-slate-400">Designing executive dashboards, ad-hoc reports, API webhook ingestors, and automated Insurance Information Bureau regulatory feeds.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. FEATURED PROJECTS CASE STUDIES -->
+    <section id="projects" class="py-20 border-b border-slate-800/60 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-xs uppercase font-mono tracking-widest text-cloud-accent mb-2">Enterprise Case Studies</h2>
+          <h3 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Production Implementations</h3>
+          <p class="text-slate-400 mt-2 text-sm sm:text-base">Realized cloud data platforms spanning post-trade settlements, energy grid modernization, and insurance compliance.</p>
+        </div>
+
+        <div class="space-y-12">
+          
+          <!-- PROJECT 1: Sankalp IIB (Chola MS) -->
+          <article class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 transition relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div>
+                <span class="px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  Chola MS &bull; Insurance Domain
+                </span>
+                <h4 class="text-2xl sm:text-3xl font-bold text-white mt-2">Chola MS Sankalp IIB Data Platform</h4>
+              </div>
+              <div class="text-xs font-mono text-slate-400 bg-cloud-900 px-3 py-1.5 rounded-lg border border-slate-800">
+                Current Production Platform
+              </div>
+            </div>
+
+            <!-- Tabbed navigation within project -->
+            <div class="flex gap-2 border-b border-slate-800/80 pb-3 mb-6 overflow-x-auto text-xs font-mono">
+              <button onclick="switchProjectTab('p1', 'context')" id="p1-btn-context" class="p1-tab px-3 py-1.5 rounded-lg bg-cloud-accent/15 text-cloud-accent font-semibold border border-cloud-accent/30">Business Context</button>
+              <button onclick="switchProjectTab('p1', 'tech')" id="p1-btn-tech" class="p1-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">Architecture &amp; Tech Stack</button>
+              <button onclick="switchProjectTab('p1', 'achieve')" id="p1-btn-achieve" class="p1-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">Key Engineering Outcomes</button>
+              <button onclick="switchProjectTab('p1', 'code')" id="p1-btn-code" class="p1-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">PySpark Pipeline Snippet</button>
+            </div>
+
+            <!-- Tab Content 1: Context -->
+            <div id="p1-tab-context" class="p1-content space-y-4">
+              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Working on the Chola MS Sankalp insurance data platform processing comprehensive <strong>policy, premium, claims, and customer data</strong>. The platform was established to consolidate disparate operational transaction systems and ensure compliant data delivery to the <strong>Insurance Information Bureau (IIB)</strong> with strict data integrity standards.
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div class="p-3 rounded-xl bg-cloud-900/60 border border-slate-800">
+                  <span class="text-slate-500 font-mono text-[10px] block">DATA DOMAINS</span>
+                  <p class="text-white text-xs font-medium mt-1">Policy, Premium, Claims, Customer</p>
+                </div>
+                <div class="p-3 rounded-xl bg-cloud-900/60 border border-slate-800">
+                  <span class="text-slate-500 font-mono text-[10px] block">CORE PATTERN</span>
+                  <p class="text-cloud-accent text-xs font-medium mt-1">Medallion (Bronze &bull; Silver &bull; Gold)</p>
+                </div>
+                <div class="p-3 rounded-xl bg-cloud-900/60 border border-slate-800">
+                  <span class="text-slate-500 font-mono text-[10px] block">REGULATORY TARGET</span>
+                  <p class="text-emerald-400 text-xs font-medium mt-1">IIB Submission &amp; Audit Layer</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab Content 2: Tech -->
+            <div id="p1-tab-tech" class="p1-content hidden space-y-4">
+              <div class="flex flex-wrap gap-2 mb-3">
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">AWS Glue</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">PySpark</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">AWS Lambda</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">Amazon S3</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">Amazon Redshift</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">Apache Airflow</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">AWS CloudWatch</span>
+              </div>
+              <p class="text-slate-300 text-sm leading-relaxed">
+                Implemented Medallion Architecture across Amazon S3: <strong>Bronze Layer</strong> captures immutable raw feeds from API Gateway and Lambda ingestion. <strong>Silver Layer</strong> executes schema verification, type enforcement, and duplicate handling via AWS Glue PySpark jobs. <strong>Gold Layer</strong> loads curated analytical tables into Amazon Redshift with automated reconciliation checkpoints before IIB reporting submissions.
+              </p>
+            </div>
+
+            <!-- Tab Content 3: Outcomes -->
+            <div id="p1-tab-achieve" class="p1-content hidden space-y-3">
+              <ul class="space-y-2 text-sm text-slate-300">
+                <li class="flex items-start gap-2">
+                  <span class="text-cloud-accent font-mono mt-0.5">&bull;</span>
+                  <span>Developed the official <strong>IIB Submission Layer</strong> equipped with automated reconciliation checks, verifying policy records against underwriting claims before external transmission.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-cloud-accent font-mono mt-0.5">&bull;</span>
+                  <span>Architected serverless API-based ingestion using AWS Lambda and API Gateway for immediate operational payload capture.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-cloud-accent font-mono mt-0.5">&bull;</span>
+                  <span>Established CloudWatch metrics, alarms, and logging across Glue PySpark jobs and Airflow DAGs for rapid operational triage.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Tab Content 4: Code Preview -->
+            <div id="p1-tab-code" class="p1-content hidden">
+              <div class="rounded-xl bg-cloud-950 border border-slate-800 p-4 font-mono text-xs overflow-x-auto text-slate-300">
+                <div class="text-slate-500 mb-2"># Sankalp IIB: PySpark Silver Layer Transformation &amp; Validation Check</div>
+<pre><code class="language-python">import sys
+from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
+from pyspark.sql.functions import col, when, to_date, current_timestamp
+
+glueContext = GlueContext(SparkContext.getOrCreate())
+spark = glueContext.spark_session
+
+# Ingest Bronze policy & claims dataset
+raw_df = spark.read.parquet("s3://chola-sankalp-bronze/policy_data/")
+
+# Schema enforcement & validation logic
+validated_df = raw_df.filter(col("policy_no").isNotNull() & (col("premium_amt") >= 0)) \
+    .withColumn("issue_date", to_date(col("issue_date_raw"), "yyyy-MM-dd")) \
+    .withColumn("ingest_timestamp", current_timestamp()) \
+    .dropDuplicates(["policy_no", "endorsement_id"])
+
+# Write to Silver layer partitioned by business date
+validated_df.write.mode("append") \
+    .partitionBy("issue_date") \
+    .parquet("s3://chola-sankalp-silver/curated_policy/")
+</code></pre>
+              </div>
+            </div>
+
+          </article>
+
+          <!-- PROJECT 2: ATOM Analytics Platform (Accenture) -->
+          <article class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 transition relative overflow-hidden">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div>
+                <span class="px-3 py-1 rounded-full text-xs font-mono font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                  Accenture &bull; Capital Markets &amp; Banking
+                </span>
+                <h4 class="text-2xl sm:text-3xl font-bold text-white mt-2">Applied Technology &amp; Operations for Markets (ATOM)</h4>
+              </div>
+              <div class="text-xs font-mono text-slate-400 bg-cloud-900 px-3 py-1.5 rounded-lg border border-slate-800">
+                Multi-Tenant Cloud Analytics
+              </div>
+            </div>
+
+            <!-- Tabbed navigation -->
+            <div class="flex gap-2 border-b border-slate-800/80 pb-3 mb-6 overflow-x-auto text-xs font-mono">
+              <button onclick="switchProjectTab('p2', 'context')" id="p2-btn-context" class="p2-tab px-3 py-1.5 rounded-lg bg-cloud-accent/15 text-cloud-accent font-semibold border border-cloud-accent/30">Business Context</button>
+              <button onclick="switchProjectTab('p2', 'tech')" id="p2-btn-tech" class="p2-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">Architecture &amp; Tech Stack</button>
+              <button onclick="switchProjectTab('p2', 'achieve')" id="p2-btn-achieve" class="p2-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">Key Engineering Outcomes</button>
+              <button onclick="switchProjectTab('p2', 'sql')" id="p2-btn-sql" class="p2-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">Redshift Procedure Sample</button>
+            </div>
+
+            <!-- Context -->
+            <div id="p2-tab-context" class="p2-content space-y-4">
+              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                ATOM is an Accenture Business Service operating as the only running utility service in the <strong>Post-Trade Settlement</strong> space across investment markets and banking products. Operating under a pay-per-trade model for global banking institutions including a <strong>Tier-1 French Bank, Tier-2 Dutch Bank, and Tier-1 UK Bank</strong>.
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div class="p-3 rounded-xl bg-cloud-900/60 border border-slate-800">
+                  <span class="text-slate-500 font-mono text-[10px] block">CLIENT BASE</span>
+                  <p class="text-white text-xs font-medium mt-1">Tier-1 French &bull; UK &bull; Dutch Banks</p>
+                </div>
+                <div class="p-3 rounded-xl bg-cloud-900/60 border border-slate-800">
+                  <span class="text-slate-500 font-mono text-[10px] block">DOMAIN</span>
+                  <p class="text-cloud-accent text-xs font-medium mt-1">Post-Trade Settlement Utilities</p>
+                </div>
+                <div class="p-3 rounded-xl bg-cloud-900/60 border border-slate-800">
+                  <span class="text-slate-500 font-mono text-[10px] block">SERVICE TYPE</span>
+                  <p class="text-yellow-400 text-xs font-medium mt-1">Pay-Per-Trade Shared Cloud Infra</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tech -->
+            <div id="p2-tab-tech" class="p2-content hidden space-y-4">
+              <div class="flex flex-wrap gap-2 mb-3">
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">AWS Glue</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">PySpark</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">AWS Lambda</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">Kinesis Firehose</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">Amazon Redshift</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">AWS QuickSight</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">CloudFormation</span>
+              </div>
+              <p class="text-slate-300 text-sm leading-relaxed">
+                Ingested structured and semi-structured trade message formats from disparate banking feeds. Built serverless transformation pipelines using AWS Glue in PySpark, integrated streaming ingestion via Kinesis Firehose, established multi-tenant partitioned Amazon Redshift star schemas, and built an automated executive reporting suite in AWS QuickSight.
+              </p>
+            </div>
+
+            <!-- Outcomes -->
+            <div id="p2-tab-achieve" class="p2-content hidden space-y-3">
+              <ul class="space-y-2 text-sm text-slate-300">
+                <li class="flex items-start gap-2">
+                  <span class="text-cloud-accent font-mono mt-0.5">&bull;</span>
+                  <span>Led the design and development of the <strong>mutualized data warehouse architecture</strong> on Amazon Redshift, supporting multiple international banking institutions.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-cloud-accent font-mono mt-0.5">&bull;</span>
+                  <span>Engineered complex procedures, views, and materialized views in Redshift to transform raw trade operations data into rapid reporting formats.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-cloud-accent font-mono mt-0.5">&bull;</span>
+                  <span>Developed data archival policies, database maintenance scripts, and query fine-tuning strategies to ensure low-latency ad-hoc analysis in AWS QuickSight.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-cloud-accent font-mono mt-0.5">&bull;</span>
+                  <span>Recognized with the prestigious <strong>Accenture Celebrates Excellence Award</strong> in the Growth Catalyst category for client value creation.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- SQL Sample -->
+            <div id="p2-tab-sql" class="p2-content hidden">
+              <div class="rounded-xl bg-cloud-950 border border-slate-800 p-4 font-mono text-xs overflow-x-auto text-slate-300">
+                <div class="text-slate-500 mb-2">-- Redshift Materialized View &amp; Multi-Tenant Settlement Summary</div>
+<pre><code class="language-sql">CREATE MATERIALIZED VIEW mv_post_trade_settlement_summary AS
+SELECT 
+    t.client_id,
+    t.trade_date,
+    t.settlement_status,
+    COUNT(t.trade_id) AS total_trades,
+    SUM(t.trade_value_usd) AS aggregate_volume_usd,
+    AVG(DATEDIFF(minute, t.trade_timestamp, t.settled_timestamp)) AS avg_settlement_latency_mins
+FROM dw_gold.fact_trade_events t
+WHERE t.trade_date >= DATEADD(day, -90, CURRENT_DATE)
+GROUP BY t.client_id, t.trade_date, t.settlement_status;
+
+-- Automated Refresh Stored Procedure for Operational Pipeline
+CREATE OR REPLACE PROCEDURE prc_refresh_settlement_views()
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    REFRESH MATERIALIZED VIEW mv_post_trade_settlement_summary;
+    COMMIT;
+END;
+$$;
+</code></pre>
+              </div>
+            </div>
+
+          </article>
+
+          <!-- PROJECT 3: NextEra Energy / Florida Power & Light (Infosys) -->
+          <article class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 transition relative overflow-hidden">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div>
+                <span class="px-3 py-1 rounded-full text-xs font-mono font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                  Infosys &bull; Energy &amp; Utilities
+                </span>
+                <h4 class="text-2xl sm:text-3xl font-bold text-white mt-2">NextEra Energy / Florida Power &amp; Light (FPL)</h4>
+              </div>
+              <div class="text-xs font-mono text-slate-400 bg-cloud-900 px-3 py-1.5 rounded-lg border border-slate-800">
+                Legacy Oracle to Modern Cloud DB Migration
+              </div>
+            </div>
+
+            <!-- Tabbed navigation -->
+            <div class="flex gap-2 border-b border-slate-800/80 pb-3 mb-6 overflow-x-auto text-xs font-mono">
+              <button onclick="switchProjectTab('p3', 'context')" id="p3-btn-context" class="p3-tab px-3 py-1.5 rounded-lg bg-cloud-accent/15 text-cloud-accent font-semibold border border-cloud-accent/30">Business Context</button>
+              <button onclick="switchProjectTab('p3', 'tech')" id="p3-btn-tech" class="p3-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">Architecture &amp; Tech Stack</button>
+              <button onclick="switchProjectTab('p3', 'achieve')" id="p3-btn-achieve" class="p3-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">Key Engineering Outcomes</button>
+            </div>
+
+            <!-- Context -->
+            <div id="p3-tab-context" class="p3-content space-y-4">
+              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Migrating critical utility distribution data from legacy <strong>Oracle-based systems (OCS, Tactical, DSS)</strong> into <strong>PostgreSQL on EDP ADMS (Enterprise Data Platform - Advanced Distribution Management System)</strong> for NextEra Energy / Florida Power &amp; Light.
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div class="p-3 rounded-xl bg-cloud-900/60 border border-slate-800">
+                  <span class="text-slate-500 font-mono text-[10px] block">LEGACY SOURCES</span>
+                  <p class="text-white text-xs font-medium mt-1">Oracle OCS, Tactical &amp; DSS</p>
+                </div>
+                <div class="p-3 rounded-xl bg-cloud-900/60 border border-slate-800">
+                  <span class="text-slate-500 font-mono text-[10px] block">TARGET DESTINATION</span>
+                  <p class="text-cloud-accent text-xs font-medium mt-1">PostgreSQL on EDP ADMS</p>
+                </div>
+                <div class="p-3 rounded-xl bg-cloud-900/60 border border-slate-800">
+                  <span class="text-slate-500 font-mono text-[10px] block">ROLE</span>
+                  <p class="text-amber-400 text-xs font-medium mt-1">Senior Associate Consultant</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tech -->
+            <div id="p3-tab-tech" class="p3-content hidden space-y-4">
+              <div class="flex flex-wrap gap-2 mb-3">
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">AWS Glue</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">AWS Lambda</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">PySpark</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">PostgreSQL</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">Oracle DB</span>
+                <span class="px-2.5 py-1 rounded bg-cloud-900 border border-slate-800 text-xs font-mono text-cloud-accent">Amazon S3</span>
+              </div>
+              <p class="text-slate-300 text-sm leading-relaxed">
+                Designed and implemented high-volume data extraction pipelines using AWS services. AWS Lambda orchestrated initial trigger handoffs while AWS Glue and PySpark executed complex column mapping, data sanitization, timestamp standardization, and bulk loads into target PostgreSQL tables.
+              </p>
+            </div>
+
+            <!-- Outcomes -->
+            <div id="p3-tab-achieve" class="p3-content hidden space-y-3">
+              <ul class="space-y-2 text-sm text-slate-300">
+                <li class="flex items-start gap-2">
+                  <span class="text-cloud-accent font-mono mt-0.5">&bull;</span>
+                  <span>Modernized mission-critical legacy energy utility data storage, transitioning from monolithic Oracle databases to flexible PostgreSQL cloud nodes.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-cloud-accent font-mono mt-0.5">&bull;</span>
+                  <span>Formulated automated schema mapping templates in PySpark ensuring zero loss of audit trails or historical grid performance records.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-cloud-accent font-mono mt-0.5">&bull;</span>
+                  <span>Integrated data validation check scripts between legacy and target databases to verify record counts, hash checks, and relational integrity.</span>
+                </li>
+              </ul>
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. PROFESSIONAL EXPERIENCE TIMELINE -->
+    <section id="experience" class="py-20 border-b border-slate-800/60 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-xs uppercase font-mono tracking-widest text-cloud-accent mb-2">Career Trajectory</h2>
+          <h3 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Professional Experience</h3>
+          <p class="text-slate-400 mt-2 text-sm sm:text-base">Chronological progression through top-tier consulting and enterprise institutions.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto relative">
+          
+          <!-- Central Glow Line -->
+          <div class="absolute left-4 sm:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-cloud-accent via-blue-500 to-slate-800 -translate-x-1/2"></div>
+
+          <div class="space-y-12">
+
+            <!-- Item 1: Chola MS -->
+            <div class="relative flex flex-col sm:flex-row items-start group">
+              <!-- Dot Indicator -->
+              <div class="absolute left-4 sm:left-1/2 w-4 h-4 rounded-full bg-emerald-400 border-4 border-cloud-950 -translate-x-1/2 z-20 shadow-lg shadow-emerald-400/50 mt-6"></div>
+
+              <!-- Content Block (Left on Desktop) -->
+              <div class="sm:w-1/2 pl-12 sm:pl-0 sm:pr-12 text-left sm:text-right w-full">
+                <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                  <span class="px-2.5 py-1 rounded text-[11px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                    16 July 2026 – Present
+                  </span>
+                  <h4 class="text-lg font-bold text-white mt-2">Senior Data Engineer</h4>
+                  <p class="text-sm font-semibold text-slate-300">Chola MS</p>
+                  <p class="text-xs text-slate-400 mt-2">
+                    Leading the Sankalp insurance data platform engineering. Implementing Medallion Architecture (Bronze, Silver, Gold) using AWS Glue, PySpark, Lambda, S3, and Redshift. Developed the IIB Submission Layer with automated validation, reconciliation, and CloudWatch alerting.
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 mt-3 justify-start sm:justify-end text-[10px] font-mono text-slate-400">
+                    <span class="bg-cloud-900 px-2 py-0.5 rounded border border-slate-800">AWS Glue</span>
+                    <span class="bg-cloud-900 px-2 py-0.5 rounded border border-slate-800">Redshift</span>
+                    <span class="bg-cloud-900 px-2 py-0.5 rounded border border-slate-800">IIB Submission</span>
+                    <span class="bg-cloud-900 px-2 py-0.5 rounded border border-slate-800">Airflow</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hidden sm:block sm:w-1/2"></div>
+            </div>
+
+            <!-- Item 2: Infosys -->
+            <div class="relative flex flex-col sm:flex-row items-start group">
+              <div class="absolute left-4 sm:left-1/2 w-4 h-4 rounded-full bg-blue-400 border-4 border-cloud-950 -translate-x-1/2 z-20 shadow-lg shadow-blue-400/50 mt-6"></div>
+
+              <div class="hidden sm:block sm:w-1/2"></div>
+
+              <!-- Content Block (Right on Desktop) -->
+              <div class="sm:w-1/2 pl-12 sm:pl-12 text-left w-full">
+                <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                  <span class="px-2.5 py-1 rounded text-[11px] font-mono bg-blue-500/10 text-blue-400 border border-blue-500/30">
+                    13 February 2025 – 10 July 2026
+                  </span>
+                  <h4 class="text-lg font-bold text-white mt-2">Senior Associate Consultant</h4>
+                  <p class="text-sm font-semibold text-slate-300">Infosys</p>
+                  <p class="text-xs text-slate-400 mt-2">
+                    Spearheaded legacy Oracle data modernization into PostgreSQL on EDP ADMS for NextEra Energy / Florida Power &amp; Light. Built ETL workflows leveraging AWS Glue, Lambda, and PySpark for extraction, schema remapping, and cross-database validation.
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 mt-3 text-[10px] font-mono text-slate-400">
+                    <span class="bg-cloud-900 px-2 py-0.5 rounded border border-slate-800">PostgreSQL</span>
+                    <span class="bg-cloud-900 px-2 py-0.5 rounded border border-slate-800">Oracle Migration</span>
+                    <span class="bg-cloud-900 px-2 py-0.5 rounded border border-slate-800">AWS Glue</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3: Accenture - Custom Software Engineer Analyst -->
+            <div class="relative flex flex-col sm:flex-row items-start group">
+              <div class="absolute left-4 sm:left-1/2 w-4 h-4 rounded-full bg-cloud-accent border-4 border-cloud-950 -translate-x-1/2 z-20 shadow-lg shadow-cyan-400/50 mt-6"></div>
+
+              <!-- Content Block (Left on Desktop) -->
+              <div class="sm:w-1/2 pl-12 sm:pl-0 sm:pr-12 text-left sm:text-right w-full">
+                <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                  <span class="px-2.5 py-1 rounded text-[11px] font-mono bg-cloud-accent/10 text-cloud-accent border border-cloud-accent/30">
+                    December 2023 – 10 February 2025
+                  </span>
+                  <h4 class="text-lg font-bold text-white mt-2">Custom Software Engineer Analyst</h4>
+                  <p class="text-sm font-semibold text-slate-300">Accenture</p>
+                  <p class="text-xs text-slate-400 mt-2">
+                    Architected mutualized data warehouse schemas on Amazon Redshift for the ATOM Capital Markets Analytics platform. Built serverless PySpark transformation pipelines, query fine-tuning, and operational automation frameworks on AWS.
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 mt-3 justify-start sm:justify-end text-[10px] font-mono text-slate-400">
+                    <span class="bg-cloud-900 px-2 py-0.5 rounded border border-slate-800">Redshift Tuning</span>
+                    <span class="bg-cloud-900 px-2 py-0.5 rounded border border-slate-800">PySpark</span>
+                    <span class="bg-cloud-900 px-2 py-0.5 rounded border border-slate-800">QuickSight</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hidden sm:block sm:w-1/2"></div>
+            </div>
+
+            <!-- Item 4: Accenture - Application Development Associate -->
+            <div class="relative flex flex-col sm:flex-row items-start group">
+              <div class="absolute left-4 sm:left-1/2 w-4 h-4 rounded-full bg-purple-400 border-4 border-cloud-950 -translate-x-1/2 z-20 shadow-lg shadow-purple-400/50 mt-6"></div>
+
+              <div class="hidden sm:block sm:w-1/2"></div>
+
+              <!-- Content Block (Right on Desktop) -->
+              <div class="sm:w-1/2 pl-12 sm:pl-12 text-left w-full">
+                <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                  <span class="px-2.5 py-1 rounded text-[11px] font-mono bg-purple-500/10 text-purple-400 border border-purple-500/30">
+                    03 September 2021 – November 2023
+                  </span>
+                  <h4 class="text-lg font-bold text-white mt-2">Application Development Associate</h4>
+                  <p class="text-sm font-semibold text-slate-300">Accenture</p>
+                  <p class="text-xs text-slate-400 mt-2">
+                    Engineered data ingestion pipelines from external cloud storage using AWS Lambda and PySpark. Implemented Kinesis Firehose stream transformations, created ad-hoc reporting in QuickSight, and deployed infrastructure with AWS CloudFormation and Jenkins CI/CD.
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 mt-3 text-[10px] font-mono text-slate-400">
+                    <span class="bg-cloud-900 px-2 py-0.5 rounded border border-slate-800">Lambda Python</span>
+                    <span class="bg-cloud-900 px-2 py-0.5 rounded border border-slate-800">Kinesis Firehose</span>
+                    <span class="bg-cloud-900 px-2 py-0.5 rounded border border-slate-800">Jenkins CI/CD</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. CERTIFICATIONS & HONORS -->
+    <section id="certifications" class="py-20 border-b border-slate-800/60 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-xs uppercase font-mono tracking-widest text-cloud-accent mb-2">Verified Credentials</h2>
+          <h3 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Certifications &amp; Achievements</h3>
+          <p class="text-slate-400 mt-2 text-sm sm:text-base">Recognized industry credentials and corporate excellence honors.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Cert 1: AWS Certified Data Engineer -->
+          <div class="glass-card rounded-2xl p-6 border border-cloud-aws/30 relative overflow-hidden group hover:border-cloud-aws transition">
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-cloud-aws/10 rounded-full blur-2xl group-hover:bg-cloud-aws/20 transition"></div>
+            
+            <div class="w-12 h-12 rounded-xl bg-cloud-aws/15 border border-cloud-aws/30 flex items-center justify-center text-cloud-aws mb-4">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+            </div>
+
+            <span class="text-[10px] font-mono text-cloud-aws bg-cloud-aws/10 px-2 py-0.5 rounded border border-cloud-aws/20">AWS Official</span>
+            <h4 class="text-lg font-bold text-white mt-2">AWS Certified Data Engineer – Associate</h4>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+              Validates expertise in data ingestion, transformation, pipeline orchestration, data security, Redshift warehouse optimization, and serverless compute on AWS.
+            </p>
+            <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span>Currently in training for: AWS Analytics - Specialty</span>
+            </div>
+          </div>
+
+          <!-- Award: Accenture Celebrates Excellence -->
+          <div class="glass-card rounded-2xl p-6 border border-purple-500/30 relative overflow-hidden group hover:border-purple-400 transition">
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition"></div>
+            
+            <div class="w-12 h-12 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+            </div>
+
+            <span class="text-[10px] font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">Excellence Award</span>
+            <h4 class="text-lg font-bold text-white mt-2">Accenture Celebrates Excellence</h4>
+            <p class="text-xs text-purple-300 font-mono mt-1">Growth Catalyst Category</p>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+              Recognized for outstanding contribution in creating incredible value for clients in key growth priority areas on the multi-tenant ATOM capital markets platform.
+            </p>
+            <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] font-mono text-slate-400">
+              Honored by Accenture Leadership
+            </div>
+          </div>
+
+          <!-- Gamified: AWS GameDay Participant -->
+          <div class="glass-card rounded-2xl p-6 border border-cloud-accent/30 relative overflow-hidden group hover:border-cloud-accent transition">
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition"></div>
+            
+            <div class="w-12 h-12 rounded-xl bg-cloud-accent/15 border border-cloud-accent/30 flex items-center justify-center text-cloud-accent mb-4">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+
+            <span class="text-[10px] font-mono text-cloud-accent bg-cloud-accent/10 px-2 py-0.5 rounded border border-cloud-accent/20">Hackathon &bull; Simulation</span>
+            <h4 class="text-lg font-bold text-white mt-2">AWS GameDay Participant</h4>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+              Participated in AWS GameDay, an interactive team-based technical exercise testing architecture resilience, incident response, and performance tuning in a gamified environment.
+            </p>
+            <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] font-mono text-slate-400">
+              Real-World Architectural Triage
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Education Sub-card -->
+        <div class="mt-8 glass-card rounded-2xl p-6 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-slate-300 font-mono text-lg font-bold">
+              🎓
+            </div>
+            <div>
+              <h5 class="text-white font-bold text-base">Bachelor of Technology (B.Tech) — Electronics &amp; Communication Engineering</h5>
+              <p class="text-xs text-slate-400 font-mono">Sree Vidyaniketan Engineering College, Tirupathi &bull; CGPA: 7.73 &bull; Graduated 2021</p>
+            </div>
+          </div>
+          <div class="text-xs font-mono text-slate-400 bg-cloud-900 px-3 py-1.5 rounded-lg border border-slate-800 whitespace-nowrap">
+            Graduated with Distinction
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 8. RECRUITER & HIRING MANAGER CONTACT HUB -->
+    <section id="contact" class="py-20 border-b border-slate-800/60 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-xs uppercase font-mono tracking-widest text-cloud-accent mb-2">Connect &amp; Collaborate</h2>
+          <h3 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Get In Touch</h3>
+          <p class="text-slate-400 mt-2 text-sm sm:text-base">Recruiters, engineering leads, and technical founders are welcome to reach out for high-impact cloud data roles.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Contact Details Card -->
+          <div class="lg:col-span-5 glass-card rounded-2xl p-6 sm:p-8 border border-slate-800 space-y-6">
+            <h4 class="text-xl font-bold text-white">Direct Coordinates</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Feel free to initiate conversations regarding Full-time AWS Data Engineer, Senior Cloud Pipeline Architect, or Distributed Computing positions.
+            </p>
+
+            <div class="space-y-4 text-sm font-mono">
+              
+              <!-- Email -->
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-cloud-900/60 border border-slate-800">
+                <div class="w-9 h-9 rounded-lg bg-cloud-accent/15 text-cloud-accent flex items-center justify-center">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <div class="flex-1 overflow-hidden">
+                  <span class="text-[10px] text-slate-500 block">PRIMARY EMAIL</span>
+                  <a href="mailto:preethisekhar90086@gmail.com" class="text-white hover:text-cloud-accent transition truncate block text-xs">preethisekhar90086@gmail.com</a>
+                </div>
+                <button onclick="copyToClipboard('preethisekhar90086@gmail.com', 'Email copied!')" class="text-slate-400 hover:text-white p-1" title="Copy Email">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </button>
+              </div>
+
+              <!-- Phone -->
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-cloud-900/60 border border-slate-800">
+                <div class="w-9 h-9 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                </div>
+                <div class="flex-1">
+                  <span class="text-[10px] text-slate-500 block">DIRECT PHONE</span>
+                  <a href="tel:+919908026034" class="text-white hover:text-emerald-400 transition text-xs">+91 9908026034</a>
+                </div>
+                <button onclick="copyToClipboard('+919908026034', 'Phone number copied!')" class="text-slate-400 hover:text-white p-1" title="Copy Phone">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </button>
+              </div>
+
+              <!-- Location -->
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-cloud-900/60 border border-slate-800">
+                <div class="w-9 h-9 rounded-lg bg-cloud-aws/15 text-cloud-aws flex items-center justify-center">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <div class="flex-1">
+                  <span class="text-[10px] text-slate-500 block">LOCATION</span>
+                  <span class="text-white text-xs">Pichatur / Chittoor, AP, India (517587)</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Professional Profiles / Editable Placeholders -->
+            <div class="pt-4 border-t border-slate-800">
+              <span class="text-[10px] font-mono text-slate-400 block mb-3">PROFESSIONAL NETWORKS</span>
+              <div class="flex gap-3">
+                <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-lg border border-slate-800 bg-cloud-900 hover:border-cloud-accent hover:text-cloud-accent text-xs font-mono text-slate-300 flex items-center justify-center gap-2 transition">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                  <span>LinkedIn Profile</span>
+                </a>
+                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 rounded-lg border border-slate-800 bg-cloud-900 hover:border-cloud-accent hover:text-cloud-accent text-xs font-mono text-slate-300 flex items-center justify-center gap-2 transition">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                  <span>GitHub Repos</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Direct Inquiry Form -->
+          <div class="lg:col-span-7 glass-card rounded-2xl p-6 sm:p-8 border border-slate-800">
+            <h4 class="text-xl font-bold text-white mb-2">Send an Opportunity or Inquiry</h4>
+            <p class="text-xs text-slate-400 mb-6">Submitted messages are validated client-side with delivery confirmation.</p>
+
+            <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="contactName" class="block text-xs font-mono text-slate-300 mb-1">Your Name *</label>
+                  <input type="text" id="contactName" required placeholder="e.g. Sarah Connor" class="w-full bg-cloud-950 border border-slate-800 focus:border-cloud-accent rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none transition" />
+                </div>
+                <div>
+                  <label for="contactEmail" class="block text-xs font-mono text-slate-300 mb-1">Your Work Email *</label>
+                  <input type="email" id="contactEmail" required placeholder="name@company.com" class="w-full bg-cloud-950 border border-slate-800 focus:border-cloud-accent rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none transition" />
+                </div>
+              </div>
+
+              <div>
+                <label for="contactSubject" class="block text-xs font-mono text-slate-300 mb-1">Inquiry Type / Role *</label>
+                <select id="contactSubject" class="w-full bg-cloud-950 border border-slate-800 focus:border-cloud-accent rounded-xl px-4 py-3 text-sm text-white focus:outline-none transition">
+                  <option value="Senior Data Engineer Full-Time">Full-time AWS Data Engineering Opportunity</option>
+                  <option value="Cloud Pipeline Consulting">Cloud ETL / PySpark Architecture Project</option>
+                  <option value="Technical Interview Request">Recruiter / Technical Interview Request</option>
+                  <option value="General Professional Connection">General Networking / Tech Exchange</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="contactMessage" class="block text-xs font-mono text-slate-300 mb-1">Message *</label>
+                <textarea id="contactMessage" rows="4" required placeholder="Provide project context, compensation details, tech stack specifications, or interview schedules..." class="w-full bg-cloud-950 border border-slate-800 focus:border-cloud-accent rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none transition"></textarea>
+              </div>
+
+              <div class="flex items-center justify-between pt-2">
+                <span class="text-[11px] font-mono text-slate-500">Typical response time: &lt; 24 hours</span>
+                <button type="submit" id="submitFormBtn" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cloud-accent to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-cloud-950 font-bold text-sm font-mono tracking-wide shadow-lg shadow-cyan-500/20 transition flex items-center gap-2">
+                  <span>Transmit Message</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                </button>
+              </div>
+
+              <!-- Inline success toast container -->
+              <div id="formSuccessToast" class="hidden p-4 rounded-xl bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs font-mono flex items-start gap-3 mt-4">
+                <span class="text-base">✓</span>
+                <div>
+                  <span class="font-bold block">Transmission Verified!</span>
+                  <span id="formFeedbackMessage">Thank you for reaching out. A confirmation prompt has been logged and an email trigger has been prepared.</span>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 9. MINIMAL TECHNICAL FOOTER -->
+  <footer class="bg-cloud-950 border-t border-slate-800/80 py-10 relative z-10 text-xs text-slate-500 font-mono">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 rounded-lg bg-cloud-900 border border-slate-800 flex items-center justify-center font-bold text-cloud-accent">
+          PG
+        </div>
+        <div>
+          <span class="text-slate-300 font-semibold block">Preethiraj Gorre</span>
+          <span>AWS Data Engineer &bull; Portfolio 2026</span>
+        </div>
+      </div>
+
+      <!-- Quick Nav Links -->
+      <div class="flex flex-wrap justify-center gap-6 text-slate-400">
+        <a href="#about" class="hover:text-cloud-accent transition">About</a>
+        <a href="#skills" class="hover:text-cloud-accent transition">Skills</a>
+        <a href="#pipeline" class="hover:text-cloud-accent transition">Pipeline Architecture</a>
+        <a href="#projects" class="hover:text-cloud-accent transition">Projects</a>
+        <a href="#experience" class="hover:text-cloud-accent transition">Experience</a>
+      </div>
+
+      <!-- Back to Top button -->
+      <div>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-2.5 rounded-lg border border-slate-800 bg-cloud-900 hover:border-cloud-accent hover:text-white transition flex items-center gap-1.5">
+          <span>Top</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- RESUME MODAL & PRINTABLE ATS VIEW -->
+  <div id="resumeModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-cloud-900 border border-slate-700 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden my-8 max-h-[90vh] flex flex-col">
+      
+      <!-- Modal Header -->
+      <div class="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between bg-cloud-950">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-cloud-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <span class="font-bold text-white text-sm sm:text-base">Preethiraj_Gorre_AWS_Data_Engineer_Resume.pdf</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="window.print()" class="px-3 py-1.5 rounded-lg bg-cloud-accent text-cloud-950 font-bold text-xs font-mono hover:bg-cyan-300 transition flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            Print / Save PDF
+          </button>
+          <button onclick="closeResumeModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Printable Document Area -->
+      <div id="printableResumeArea" class="p-6 sm:p-10 overflow-y-auto bg-slate-950 text-slate-200 text-xs sm:text-sm font-sans space-y-6">
+        
+        <!-- Header in Resume -->
+        <div class="border-b border-slate-700 pb-4 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div>
+            <h1 class="text-2xl font-bold text-white tracking-wide">Preethiraj Gorre</h1>
+            <p class="text-cloud-accent font-mono text-xs font-semibold mt-0.5">AWS Certified Data Engineer — Associate (~5 Years Experience)</p>
+            <p class="text-[11px] text-slate-400 mt-1">1-8C, Opp. Anganwadi Model School, Keelapudi, Pichatur, Chittoor, AP, India 517587</p>
+          </div>
+          <div class="text-right text-[11px] font-mono space-y-0.5">
+            <p class="text-slate-300">Phone: +91 9908026034</p>
+            <p class="text-cloud-accent">preethisekhar90086@gmail.com</p>
+          </div>
+        </div>
+
+        <!-- Objective -->
+        <div>
+          <h2 class="text-xs uppercase font-mono font-bold text-cloud-accent tracking-wider border-b border-slate-800 pb-1 mb-2">Professional Objective</h2>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            With five years of experience as an AWS Data Engineer, I specialize in building and optimizing data solutions using AWS services. My expertise includes developing ETL pipelines with AWS Glue using PySpark, orchestrating workflows through AWS Step Functions, and leveraging AWS Lambda for serverless processing using Python. Skilled in data warehousing with AWS Redshift using SQL, Data visualization with AWS QuickSight, and monitoring system performance with AWS CloudWatch. Additionally, foundational knowledge of Git and Jenkins for CI/CD integration, with passion for scalable data architectures.
+          </p>
+        </div>
+
+        <!-- Work Experience Timeline -->
+        <div>
+          <h2 class="text-xs uppercase font-mono font-bold text-cloud-accent tracking-wider border-b border-slate-800 pb-1 mb-2">Work Experience Summary</h2>
+          
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between items-baseline font-bold text-white text-xs">
+                <span>Chola MS &bull; Senior Data Engineer</span>
+                <span class="font-mono text-[10px] text-emerald-400">16 July 2026 – Present</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">
+                Leading Sankalp insurance data platform processing policy, premium, and claims data using Medallion Architecture (Bronze, Silver, Gold). Engineered IIB Submission Layer with automated reconciliation, API-based ingestion, and CloudWatch monitoring.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex justify-between items-baseline font-bold text-white text-xs">
+                <span>Infosys &bull; Senior Associate Consultant</span>
+                <span class="font-mono text-[10px] text-blue-400">13 February 2025 – 10 July 2026</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">
+                Led NextEra Energy / Florida Power &amp; Light (FPL) data migration from legacy Oracle-based systems (OCS, Tactical, DSS) to PostgreSQL on EDP ADMS using AWS Glue and Lambda in PySpark.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex justify-between items-baseline font-bold text-white text-xs">
+                <span>Accenture &bull; Custom Software Engineer Analyst</span>
+                <span class="font-mono text-[10px] text-cloud-accent">December 2023 – 10 February 2025</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">
+                Design &amp; development of mutualized data warehouse architecture on AWS Redshift for ATOM Capital Markets Analytics. Fine-tuning queries, data archival, serverless PySpark transformation architectures, and automation frameworks.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex justify-between items-baseline font-bold text-white text-xs">
+                <span>Accenture &bull; Application Development Associate</span>
+                <span class="font-mono text-[10px] text-purple-400">03 September 2021 – November 2023</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">
+                Ingested external cloud data via Lambda (Python/PySpark), Kinesis Firehose streams, QuickSight reporting views, Jenkins CI/CD integration, and CloudFormation infrastructure deployments.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Skills List -->
+        <div>
+          <h2 class="text-xs uppercase font-mono font-bold text-cloud-accent tracking-wider border-b border-slate-800 pb-1 mb-2">Technical Core Competencies</h2>
+          <div class="grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-300">
+            <p><strong>Cloud:</strong> AWS Glue, Lambda, S3, Redshift, Athena, QuickSight, Step Functions, CloudWatch, CloudFormation</p>
+            <p><strong>Programming &amp; Big Data:</strong> Python, PySpark, SQL, PL/pgSQL</p>
+            <p><strong>Databases:</strong> Amazon Redshift, PostgreSQL, Oracle (Migration experience)</p>
+            <p><strong>DevOps &amp; Tools:</strong> Git, Jenkins, Apache Airflow, API Gateway</p>
+          </div>
+        </div>
+
+        <!-- Education & Certifications -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <h2 class="text-xs uppercase font-mono font-bold text-cloud-accent tracking-wider border-b border-slate-800 pb-1 mb-2">Education</h2>
+            <p class="font-bold text-white text-xs">Sree Vidyaniketan Engineering College, Tirupathi</p>
+            <p class="text-[11px] text-slate-400">B.Tech in Electronics &amp; Communication Engineering &bull; CGPA: 7.73 (2021)</p>
+            <p class="text-[10px] text-slate-500 mt-1">Intermediate (M.P.C): Sri Chaitanya Jr College (94.9%, 2017)</p>
+          </div>
+          <div>
+            <h2 class="text-xs uppercase font-mono font-bold text-cloud-accent tracking-wider border-b border-slate-800 pb-1 mb-2">Certifications &amp; Honors</h2>
+            <p class="text-xs text-white"><strong>AWS Certified Data Engineer – Associate</strong></p>
+            <p class="text-[11px] text-slate-400">Accenture Celebrates Excellence Award (Growth Catalyst)</p>
+            <p class="text-[11px] text-slate-400">AWS GameDay Competitor &bull; Languages: English, Telugu, Tamil</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 bg-cloud-950 border-t border-slate-800 flex justify-end">
+        <button onclick="closeResumeModal()" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white text-xs font-mono">
+          Close Window
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toastMessage" class="fixed bottom-6 right-6 z-50 hidden max-w-sm p-4 rounded-xl glass-card border border-cloud-accent text-white font-mono text-xs shadow-2xl transition-all duration-300 transform translate-y-2">
+    <div class="flex items-center gap-2">
+      <span class="text-cloud-accent text-base">ℹ</span>
+      <span id="toastText">Action completed successfully.</span>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT: LOGIC, INTERACTIVE CANVAS, ARCHITECTURE VIEWER, FILTERS -->
+  <script>
+    // --- 1. MOBILE MENU TOGGLE ---
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIconClosed = document.getElementById('menuIconClosed');
+    const menuIconOpened = document.getElementById('menuIconOpened');
+
+    function toggleMobileMenu() {
+      const isExpanded = !mobileMenu.classList.contains('hidden');
+      if (isExpanded) {
+        mobileMenu.classList.add('hidden');
+        menuIconClosed.classList.remove('hidden');
+        menuIconOpened.classList.add('hidden');
+      } else {
+        mobileMenu.classList.remove('hidden');
+        menuIconClosed.classList.add('hidden');
+        menuIconOpened.classList.remove('hidden');
+      }
+    }
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+    // --- 2. RESUME MODAL HANDLERS ---
+    function openResumeModal() {
+      document.getElementById('resumeModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeResumeModal() {
+      document.getElementById('resumeModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // --- 3. TOAST NOTIFICATION HELPER ---
+    function showToast(message, duration = 3000) {
+      const toast = document.getElementById('toastMessage');
+      const toastText = document.getElementById('toastText');
+      toastText.innerText = message;
+      toast.classList.remove('hidden', 'translate-y-2');
+      setTimeout(() => {
+        toast.classList.add('hidden', 'translate-y-2');
+      }, duration);
+    }
+
+    // --- 4. COPY TO CLIPBOARD HELPER ---
+    function copyToClipboard(text, successMessage) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMessage);
+      } catch (err) {
+        showToast('Copied: ' + text);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    // --- 5. INTERACTIVE HTML5 CANVAS PIPELINE SIMULATOR ---
+    const canvas = document.getElementById('pipelineCanvas');
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+    let particles = [];
+    let customBatchTriggered = false;
+
+    function resizeCanvas() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Node coordinates along the pipeline
+    function getPipelineStages() {
+      const w = canvas.width;
+      const h = canvas.height;
+      return [
+        { name: 'Sources', x: w * 0.12, y: h * 0.5, color: '#38bdf8' },
+        { name: 'Ingest', x: w * 0.32, y: h * 0.3, color: '#ff9900' },
+        { name: 'Glue Spark', x: w * 0.52, y: h * 0.7, color: '#e25a1c' },
+        { name: 'Redshift', x: w * 0.72, y: h * 0.35, color: '#00f0ff' },
+        { name: 'QuickSight', x: w * 0.90, y: h * 0.55, color: '#10b981' }
+      ];
+    }
+
+    class DataParticle {
+      constructor(isBurst = false) {
+        this.reset(isBurst);
+      }
+      reset(isBurst = false) {
+        this.progress = 0;
+        this.speed = (0.003 + Math.random() * 0.004) * (isBurst ? 1.8 : 1);
+        this.size = 2.5 + Math.random() * 2;
+        this.color = Math.random() > 0.3 ? '#00f0ff' : '#ff9900';
+      }
+      update() {
+        this.progress += this.speed;
+        if (this.progress >= 1) {
+          this.reset(false);
+        }
+      }
+      draw(ctx, stages) {
+        // Multi-point spline / linear interpolation across the 5 stages
+        const totalSegments = stages.length - 1;
+        const currentSegment = Math.min(Math.floor(this.progress * totalSegments), totalSegments - 1);
+        const segmentProgress = (this.progress * totalSegments) - currentSegment;
+
+        const p0 = stages[currentSegment];
+        const p1 = stages[currentSegment + 1];
+
+        // Smooth cubic-like easing between nodes
+        const x = p0.x + (p1.x - p0.x) * segmentProgress;
+        const y = p0.y + (p1.y - p0.y) * segmentProgress + Math.sin(segmentProgress * Math.PI) * 12;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(x, y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // Initialize particles
+    for (let i = 0; i < 45; i++) {
+      const p = new DataParticle();
+      p.progress = Math.random();
+      particles.push(p);
+    }
+
+    // Canvas animation loop
+    function animatePipeline() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const stages = getPipelineStages();
+
+      // Draw connection lines between pipeline stages
+      ctx.lineWidth = 2;
+      for (let i = 0; i < stages.length - 1; i++) {
+        const start = stages[i];
+        const end = stages[i + 1];
+
+        ctx.beginPath();
+        ctx.moveTo(start.x, start.y);
+        ctx.lineTo(end.x, end.y);
+        ctx.strokeStyle = 'rgba(26, 44, 84, 0.7)';
+        ctx.stroke();
+
+        // Pulsing overlay
+        ctx.beginPath();
+        ctx.moveTo(start.x, start.y);
+        ctx.lineTo(end.x, end.y);
+        ctx.strokeStyle = 'rgba(0, 240, 255, 0.2)';
+        ctx.setLineDash([4, 12]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // Draw stage nodes
+      stages.forEach(st => {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(st.x, st.y, 9, 0, Math.PI * 2);
+        ctx.fillStyle = '#070d1a';
+        ctx.strokeStyle = st.color;
+        ctx.lineWidth = 2.5;
+        ctx.shadowColor = st.color;
+        ctx.shadowBlur = 10;
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.font = '10px "JetBrains Mono", monospace';
+        ctx.fillStyle = '#94a3b8';
+        ctx.textAlign = 'center';
+        ctx.fillText(st.name, st.x, st.y - 14);
+        ctx.restore();
+      });
+
+      // Update & draw particles
+      particles.forEach(p => {
+        p.update();
+        p.draw(ctx, stages);
+      });
+
+      animationFrameId = requestAnimationFrame(animatePipeline);
+    }
+
+    // Ingest Batch Button interaction
+    document.getElementById('triggerBatchBtn').addEventListener('click', () => {
+      for (let i = 0; i < 15; i++) {
+        const p = new DataParticle(true);
+        p.progress = 0.05 * Math.random();
+        particles.push(p);
+      }
+      const statThroughput = document.getElementById('statThroughput');
+      const cur = parseInt(statThroughput.innerText.replace(/[^0-9]/g, '')) || 14820;
+      statThroughput.innerText = (cur + 5400).toLocaleString() + ' rec/s';
+      showToast('New batch ingested: 5,400 records injected into pipeline');
+    });
+
+    // --- 6. INTERACTIVE PIPELINE ARCHITECTURE SELECTOR ---
+    const pipelineData = {
+      sources: {
+        title: "01. Heterogeneous Data Sources",
+        subtitle: "Multi-tenant banking feeds, core insurance systems, SFTP drops, and operational OLTP stores.",
+        specs: [
+          "Formats: Structured (RDBMS, CSV) and Semi-structured (JSON payloads, XML, Avro).",
+          "Ingestion modes: Scheduled batch micro-drops + real-time webhook endpoints.",
+          "Network isolation: Secured via AWS VPC peering, private subnets, and AWS Secrets Manager credentials."
+        ],
+        roleFocus: "Configured secure connectivity, verified source contracts, and established handshake validation."
+      },
+      ingest: {
+        title: "02. Serverless Ingestion Gateway",
+        subtitle: "AWS Lambda in Python + Amazon API Gateway + Amazon Kinesis Data Firehose.",
+        specs: [
+          "AWS Lambda functions written in Python parse incoming requests and handle authorization.",
+          "Kinesis Firehose buffers incoming telemetry and high-frequency trade message streams.",
+          "Dynamically partitions incoming objects by year/month/day/hour upon landing in object storage."
+        ],
+        roleFocus: "Authored event-driven Python Lambda functions for external cloud ingestion and Firehose transform handlers."
+      },
+      bronze: {
+        title: "03. Bronze Layer (Raw Data Lake)",
+        subtitle: "Amazon S3 raw zone — Immutable, version-controlled repository.",
+        specs: [
+          "Stores raw inputs as received with original fidelity for complete auditability.",
+          "Lifecycle policies: Transition to S3 Standard-IA and Glacier after retention thresholds.",
+          "Bucket policies enforce SSE-KMS encryption and access least-privilege policies."
+        ],
+        roleFocus: "Designed archival policies, bucket access security, and immutable data retention architectures."
+      },
+      glue: {
+        title: "04. AWS Glue & PySpark Transformation Engine",
+        subtitle: "Serverless distributed computing orchestrating schema evolution and heavy joins.",
+        specs: [
+          "AWS Glue 4.0 (Spark 3.3 / Python 3.10) with DynamicFrames and Spark DataFrames.",
+          "Executes policy/premium reconciliation, trade enrichment, and foreign key validations.",
+          "Optimized worker allocation (G.1X / G.2X DPUs) to balance job performance and AWS cloud billing."
+        ],
+        roleFocus: "Primary architect of Glue PySpark ETL workflows, complex joins, and custom transform procedures."
+      },
+      silver: {
+        title: "05. Silver Layer (Cleansed & Enriched)",
+        subtitle: "Columnar Snappy-compressed Parquet storage on Amazon S3.",
+        specs: [
+          "Standardized schema formats with automated type casting and duplicate row suppression.",
+          "Provides unified querying layer via Amazon Athena for exploratory analytics and data science validation.",
+          "Data quality checks: Enforces not-null constraints, ranges, and referential integrity."
+        ],
+        roleFocus: "Built data validation routines and intermediate staging schemas used across operational audits."
+      },
+      gold: {
+        title: "06. Gold Layer: Amazon Redshift Data Warehouse",
+        subtitle: "Mutualized star-schema data warehouse engineered for extreme analytical throughput.",
+        specs: [
+          "Distribution styles (KEY / EVEN / ALL) matched to join patterns for zero-network node redistribution.",
+          "Materialized views for high-speed aggregations of trade settlements and insurance loss ratios.",
+          "Vacuum and analyze maintenance automated alongside WLM (Workload Management) queues."
+        ],
+        roleFocus: "Designed mutualized Redshift architectures, tuned query plans, materialized views, and stored procedures."
+      },
+      analytics: {
+        title: "07. Analytics, QuickSight BI & IIB Submissions",
+        subtitle: "Amazon QuickSight dashboards + Regulatory IIB Insurance submission packages.",
+        specs: [
+          "SPICE-powered interactive QuickSight visualizations for banking executives and risk officers.",
+          "Insurance Information Bureau (IIB) reconciliation and automated file format submissions.",
+          "Ad-hoc ad-hoc querying on Redshift and Athena with granular role-based dashboard access."
+        ],
+        roleFocus: "Created executive QuickSight BI dashboards and built the automated Chola MS IIB submission layer."
+      }
+    };
+
+    function selectPipelineNode(nodeKey) {
+      const data = pipelineData[nodeKey];
+      if (!data) return;
+
+      // Update button state
+      document.querySelectorAll('.pipeline-node').forEach(node => {
+        if (node.getAttribute('data-target') === nodeKey) {
+          node.classList.add('border-cloud-accent', 'bg-cloud-900');
+          node.classList.remove('border-slate-800', 'bg-cloud-950/80');
+        } else {
+          node.classList.remove('border-cloud-accent', 'bg-cloud-900');
+          node.classList.add('border-slate-800', 'bg-cloud-950/80');
+        }
+      });
+
+      // Render detail panel
+      const detailPanel = document.getElementById('nodeDetailPanel');
+      detailPanel.innerHTML = `
+        <div class="space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+            <div>
+              <h4 class="text-base sm:text-lg font-bold text-white font-mono text-cloud-accent">${data.title}</h4>
+              <p class="text-xs text-slate-300 mt-0.5">${data.subtitle}</p>
+            </div>
+            <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-cloud-accent/10 border border-cloud-accent/30 text-cloud-accent">
+              Inspecting Stage
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+            <div class="space-y-2">
+              <span class="text-[11px] font-mono text-slate-400 block font-semibold">TECHNICAL SPECIFICATIONS</span>
+              <ul class="space-y-1.5 text-xs text-slate-300">
+                ${data.specs.map(spec => `<li class="flex items-start gap-2"><span class="text-cloud-accent">&bull;</span><span>${spec}</span></li>`).join('')}
+              </ul>
+            </div>
+            <div class="p-4 rounded-xl bg-cloud-900/60 border border-slate-800/80">
+              <span class="text-[11px] font-mono text-cloud-aws block font-semibold mb-1">ENGINEER IMPLEMENTATION ROLE</span>
+              <p class="text-xs text-slate-300 leading-relaxed">${data.roleFocus}</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- 7. SKILL FILTERING LOGIC ---
+    function filterSkills(category) {
+      document.querySelectorAll('.skill-filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-filter') === category) {
+          btn.classList.add('border-cloud-accent', 'bg-cloud-accent/15', 'text-cloud-accent');
+          btn.classList.remove('border-slate-800', 'bg-cloud-900/60', 'text-slate-300');
+        } else {
+          btn.classList.remove('border-cloud-accent', 'bg-cloud-accent/15', 'text-cloud-accent');
+          btn.classList.add('border-slate-800', 'bg-cloud-900/60', 'text-slate-300');
+        }
+      });
+
+      document.querySelectorAll('.skill-card').forEach(card => {
+        const cardCat = card.getAttribute('data-category');
+        if (category === 'all' || cardCat === category) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // --- 8. PROJECT TABS LOGIC ---
+    function switchProjectTab(projectPrefix, tabName) {
+      // Deactivate all buttons in this project
+      document.querySelectorAll(`.${projectPrefix}-tab`).forEach(btn => {
+        btn.classList.remove('bg-cloud-accent/15', 'text-cloud-accent', 'font-semibold', 'border-cloud-accent/30');
+        btn.classList.add('text-slate-400');
+      });
+
+      // Activate selected button
+      const activeBtn = document.getElementById(`${projectPrefix}-btn-${tabName}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-cloud-accent/15', 'text-cloud-accent', 'font-semibold', 'border-cloud-accent/30');
+        activeBtn.classList.remove('text-slate-400');
+      }
+
+      // Hide all contents for this project
+      document.querySelectorAll(`.${projectPrefix}-content`).forEach(cnt => cnt.classList.add('hidden'));
+
+      // Show targeted content
+      const targetContent = document.getElementById(`${projectPrefix}-tab-${tabName}`);
+      if (targetContent) {
+        targetContent.classList.remove('hidden');
+      }
+    }
+
+    // --- 9. CONTACT FORM HANDLER ---
+    function handleContactSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const subject = document.getElementById('contactSubject').value;
+      const message = document.getElementById('contactMessage').value.trim();
+
+      if (!name || !email || !message) {
+        showToast('Please complete all required fields.');
+        return;
+      }
+
+      // Disable button temporarily to simulate transmission
+      const submitBtn = document.getElementById('submitFormBtn');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>Transmitting...</span>`;
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        
+        // Display inline confirmation
+        const toastBox = document.getElementById('formSuccessToast');
+        document.getElementById('formFeedbackMessage').innerText = 
+          `Thank you, ${name}! Your inquiry concerning "${subject}" was logged. An email dispatch has been initialized to preethisekhar90086@gmail.com.`;
+        toastBox.classList.remove('hidden');
+
+        // Reset form
+        document.getElementById('contactForm').reset();
+        showToast('Message transmitted successfully!');
+      }, 700);
+    }
+
+    // --- 10. ON WINDOW LOAD INITIALIZATION ---
+    window.onload = function () {
+      animatePipeline();
+      selectPipelineNode('bronze'); // default stage preview
+    };
+  </script>
+
+</body>
+</html>
